@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 public class MonetaryCalculator {
 
     public double percent(double amount, double percent) {
-        if (amount < 0) {
+        if (amount < 0 || percent < 0) {
             throw new IllegalArgumentException("Error: negative amount.");
         }
         return BigDecimal.valueOf(amount)

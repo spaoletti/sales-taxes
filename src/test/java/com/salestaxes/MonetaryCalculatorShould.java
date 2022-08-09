@@ -27,6 +27,7 @@ public class MonetaryCalculatorShould {
     @Test
     @Parameters({
             "-5005, 15",
+            "5005, -15"
     })
     public void
     throw_if_provided_negative_numbers(
