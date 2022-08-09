@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
@@ -66,6 +67,21 @@ public class ReceiptFactoryShould {
         String output = receipt.print();
         assertTrue(output.contains("56.64"));
         assertTrue(output.contains("16.49"));
+    }
+
+    @Test
+    public void
+    create_a_receipt_with_properly_formatted_lines() {
+        List<Product> shoppingBasket = Arrays.asList(
+                new Product("bottle of perfume", 51.49),
+                new Product("music CD", 14.99)
+        );
+        Receipt receipt = rf.create(shoppingBasket);
+        String output = receipt.print();
+        String expectedOutput =
+                "1 bottle of perfume: 56.64\n" +
+                "1 music CD: 16.49\n";
+        assertEquals(expectedOutput, output);
     }
 
 }

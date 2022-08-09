@@ -14,6 +14,7 @@ public class Receipt {
         StringBuilder sb = new StringBuilder();
         for (ReceiptLine line : lines) {
             sb.append(line);
+            sb.append('\n');
         }
         return sb.toString();
     }
