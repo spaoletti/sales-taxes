@@ -12,7 +12,7 @@ public class Receipt {
 
     public void print() {
         for (ReceiptLine line : lines) {
-            System.out.println(line.getDescription());
+            System.out.println(line);
         }
     }
 

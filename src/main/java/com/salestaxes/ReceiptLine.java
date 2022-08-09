@@ -12,4 +12,9 @@ public class ReceiptLine {
         return description;
     }
 
+    @Override
+    public String toString() {
+        return "1 " + description;
+    }
+
 }
