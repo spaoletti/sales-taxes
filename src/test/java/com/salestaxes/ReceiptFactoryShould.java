@@ -46,4 +46,17 @@ public class ReceiptFactoryShould {
         assertTrue(mockStdOut.toString().contains("book"));
     }
 
+    @Test
+    public void
+    create_a_receipt_with_the_description_of_many_products() {
+        List<Product> shoppingBasket = Arrays.asList(
+                new Product("book", 12.49),
+                new Product("music CD", 14.99)
+        );
+        Receipt receipt = rf.create(shoppingBasket);
+        receipt.print();
+        assertTrue(mockStdOut.toString().contains("book"));
+        assertTrue(mockStdOut.toString().contains("music CD"));
+    }
+
 }
