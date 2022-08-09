@@ -43,6 +43,7 @@ public class MonetaryCalculatorShould {
     @Test
     @Parameters({
             "47.50, 15, 7.15",
+            "47.50, 15.21, 7.25",
     })
     public void
     round_up_to_the_nearest_five_cents(

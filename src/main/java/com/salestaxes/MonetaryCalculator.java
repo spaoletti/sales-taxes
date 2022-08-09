@@ -21,7 +21,7 @@ public class MonetaryCalculator {
     private BigDecimal roundUp(BigDecimal price) {
         return price
                 .divide(tick, 9, RoundingMode.HALF_EVEN)
-                .setScale(0, RoundingMode.HALF_UP)
+                .setScale(0, RoundingMode.CEILING)
                 .multiply(tick);
     }
 
