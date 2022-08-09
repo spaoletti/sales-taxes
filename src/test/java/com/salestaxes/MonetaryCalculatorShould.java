@@ -12,7 +12,9 @@ public class MonetaryCalculatorShould {
 
     @Test
     @Parameters({
-            "100, 10, 10", })
+            "100, 10, 10",
+            "0, 10, 0",
+    })
     public void
     apply_percentage(
             double amount, double percent, double expected) {
