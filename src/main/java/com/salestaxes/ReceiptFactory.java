@@ -18,10 +18,12 @@ public class ReceiptFactory {
                 .map(mapProductToReceiptLine)
                 .collect(Collectors.toList());
         double salesTaxes = 0;
+        double total = 0;
         for (ReceiptLine l : lines) {
             salesTaxes = mc.add(salesTaxes, l.getTaxes());
+            total = mc.add(total, l.getGrossPrice());
         }
-        return new Receipt(lines, salesTaxes);
+        return new Receipt(lines, salesTaxes, total);
     }
 
     private Function<Product, ReceiptLine> mapProductToReceiptLine = product -> {

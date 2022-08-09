@@ -6,7 +6,6 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
@@ -128,6 +127,18 @@ public class ReceiptFactoryShould {
         Receipt receipt = rf.create(shoppingBasket);
         String output = receipt.print();
         assertTrue(output.contains("Sales Taxes: 10.35"));
+    }
+
+    @Test
+    public void
+    create_a_receipt_with_the_grand_total_line() {
+        List<Product> shoppingBasket = Arrays.asList(
+                new Product("imported book", 51.49, true),
+                new Product("imported bottle of perfume", 51.49)
+        );
+        Receipt receipt = rf.create(shoppingBasket);
+        String output = receipt.print();
+        assertTrue(output.contains("Total: 113.33"));
     }
 
 }

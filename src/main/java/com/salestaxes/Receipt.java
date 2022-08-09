@@ -6,10 +6,12 @@ public class Receipt {
 
     private List<ReceiptLine> lines;
     private double salesTaxes;
+    private final double total;
 
-    public Receipt(List<ReceiptLine> lines, double salesTaxes) {
+    public Receipt(List<ReceiptLine> lines, double salesTaxes, double total) {
         this.lines = lines;
         this.salesTaxes = salesTaxes;
+        this.total = total;
     }
 
     public String print() {
@@ -18,7 +20,8 @@ public class Receipt {
             sb.append(line);
             sb.append('\n');
         }
-        sb.append("Sales Taxes: " + salesTaxes);
+        sb.append("Sales Taxes: " + salesTaxes + "\n");
+        sb.append("Total: " + total);
         return sb.toString();
     }
 

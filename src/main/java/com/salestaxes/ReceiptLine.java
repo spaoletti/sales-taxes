@@ -16,6 +16,10 @@ public class ReceiptLine {
         return taxes;
     }
 
+    public double getGrossPrice() {
+        return grossPrice;
+    }
+
     @Override
     public String toString() {
         return "1 " + description + ": " + grossPrice;
