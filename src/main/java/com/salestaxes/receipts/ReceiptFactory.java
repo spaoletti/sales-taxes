@@ -31,7 +31,7 @@ public class ReceiptFactory {
         return new Receipt(lines, salesTaxes, total);
     }
 
-    private Function<Product, ReceiptLine> mapProductToReceiptLine = product -> {
+    private final Function<Product, ReceiptLine> mapProductToReceiptLine = product -> {
         double taxes = ts.calculate(product);
         double taxAmount = mc.percent(product.getNetPrice(), taxes);
         double grossPrice = mc.add(product.getNetPrice(), taxAmount);

@@ -7,11 +7,14 @@ import java.util.Locale;
 
 public class Receipt {
 
-    private List<ReceiptLine> lines;
-    private double salesTaxes;
+    private final List<ReceiptLine> lines;
+    private final double salesTaxes;
     private final double total;
     private final DecimalFormat df;
 
+    /* About this class: I wanted it to be strictly a data class with no behaviour, and this is why it
+     * accepts the totals in the constructor. This class can't be instanced outside this package; in order
+     * to get an instance you have to use the ReceiptFactory, and that's how we prevent inconsistencies. */
     Receipt(List<ReceiptLine> lines, double salesTaxes, double total) {
         this.lines = lines;
         this.salesTaxes = salesTaxes;
@@ -28,8 +31,8 @@ public class Receipt {
             sb.append(line.toString(df));
             sb.append('\n');
         }
-        sb.append("Sales Taxes: " + df.format(salesTaxes) + "\n");
-        sb.append("Total: " + df.format(total));
+        sb.append("Sales Taxes: ").append(df.format(salesTaxes)).append("\n");
+        sb.append("Total: ").append(df.format(total));
         return sb.toString();
     }
 
