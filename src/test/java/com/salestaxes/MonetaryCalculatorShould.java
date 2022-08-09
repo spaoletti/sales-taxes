@@ -2,6 +2,7 @@ package com.salestaxes;
 
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -9,6 +10,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(JUnitParamsRunner.class)
 public class MonetaryCalculatorShould {
+
+    MonetaryCalculator mc;
+
+    @Before
+    public void beforeEach() {
+        mc = new MonetaryCalculator();
+    }
 
     @Test
     @Parameters({
@@ -19,7 +27,6 @@ public class MonetaryCalculatorShould {
     public void
     apply_percentage(
             double amount, double percent, double expected) {
-        MonetaryCalculator mc = new MonetaryCalculator();
         double percentage = mc.percent(amount, percent);
         assertEquals(expected, percentage);
     }
@@ -32,7 +39,6 @@ public class MonetaryCalculatorShould {
     public void
     throw_if_provided_negative_numbers(
             double amount, double percent) {
-        MonetaryCalculator mc = new MonetaryCalculator();
         IllegalArgumentException e = assertThrows(
                 IllegalArgumentException.class,
                 () -> mc.percent(amount, percent)
@@ -48,7 +54,6 @@ public class MonetaryCalculatorShould {
     public void
     round_up_to_the_nearest_five_cents(
             double amount, double percent, double expected) {
-        MonetaryCalculator mc = new MonetaryCalculator();
         double percentage = mc.percent(amount, percent);
         assertEquals(expected, percentage);
     }
