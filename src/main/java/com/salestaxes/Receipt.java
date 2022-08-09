@@ -10,10 +10,12 @@ public class Receipt {
         this.lines = lines;
     }
 
-    public void print() {
+    public String print() {
+        StringBuilder sb = new StringBuilder();
         for (ReceiptLine line : lines) {
-            System.out.println(line);
+            sb.append(line);
         }
+        return sb.toString();
     }
 
 }
