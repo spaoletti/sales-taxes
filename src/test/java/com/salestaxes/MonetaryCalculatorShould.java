@@ -5,7 +5,7 @@ import junitparams.Parameters;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(JUnitParamsRunner.class)
 public class MonetaryCalculatorShould {
@@ -23,5 +23,21 @@ public class MonetaryCalculatorShould {
         double percentage = mc.percent(amount, percent);
         assertEquals(expected, percentage);
     }
+
+    @Test
+    @Parameters({
+            "-5005, 15",
+    })
+    public void
+    throw_if_provided_negative_numbers(
+            double amount, double percent) {
+        MonetaryCalculator mc = new MonetaryCalculator();
+        IllegalArgumentException e = assertThrows(
+                IllegalArgumentException.class,
+                () -> mc.percent(amount, percent)
+        );
+        assertEquals("Error: negative amount.", e.getMessage());
+    }
+
 
 }
