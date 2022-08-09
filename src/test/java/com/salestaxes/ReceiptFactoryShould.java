@@ -84,4 +84,16 @@ public class ReceiptFactoryShould {
         assertEquals(expectedOutput, output);
     }
 
+    @Test
+    public void
+    create_a_receipt_with_the_price_with_taxes_of_a_single_imported_product() {
+        List<Product> shoppingBasket = Arrays.asList(
+                new Product("imported bottle of perfume", 51.49)
+        );
+        Receipt receipt = rf.create(shoppingBasket);
+        String output = receipt.print();
+        assertTrue(output.contains("59.24"));
+    }
+
+
 }

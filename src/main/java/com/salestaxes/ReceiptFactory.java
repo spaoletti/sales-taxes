@@ -20,7 +20,8 @@ public class ReceiptFactory {
     }
 
     private Function<Product, ReceiptLine> mapProductToReceiptLine = product -> {
-        double taxes = mc.percent(product.getNetPrice(), 10);
+        double percent = 10 + (product.isImported() ? 5 : 0);
+        double taxes = mc.percent(product.getNetPrice(), percent);
         double grossPrice = mc.add(product.getNetPrice(), taxes);
         return new ReceiptLine(
                 product,

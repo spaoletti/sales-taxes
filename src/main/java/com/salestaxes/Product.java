@@ -17,4 +17,9 @@ public class Product {
     public double getNetPrice() {
         return netPrice;
     }
+
+    public boolean isImported() {
+        return description.contains("imported");
+    }
+
 }
