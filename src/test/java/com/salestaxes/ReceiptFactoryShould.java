@@ -141,4 +141,6 @@ public class ReceiptFactoryShould {
         assertTrue(output.contains("Total: 113.33"));
     }
 
+    // TODO test complete receipt!
+
 }

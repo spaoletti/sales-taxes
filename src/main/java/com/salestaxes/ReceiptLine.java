@@ -1,5 +1,7 @@
 package com.salestaxes;
 
+import java.text.DecimalFormat;
+
 public class ReceiptLine {
 
     private final double grossPrice;
@@ -20,9 +22,8 @@ public class ReceiptLine {
         return grossPrice;
     }
 
-    @Override
-    public String toString() {
-        return "1 " + description + ": " + grossPrice;
+    public String toString(DecimalFormat df) {
+        return "1 " + description + ": " + df.format(grossPrice);
     }
 
 }
