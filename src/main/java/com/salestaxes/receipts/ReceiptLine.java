@@ -1,14 +1,16 @@
-package com.salestaxes;
+package com.salestaxes.receipts;
+
+import com.salestaxes.Product;
 
 import java.text.DecimalFormat;
 
-public class ReceiptLine {
+class ReceiptLine {
 
     private final double grossPrice;
     private final double taxes;
     private String description;
 
-    public ReceiptLine(Product product, double grossPrice, double taxes) {
+    ReceiptLine(Product product, double grossPrice, double taxes) {
         this.description = product.getDescription();
         this.grossPrice = grossPrice;
         this.taxes = taxes;

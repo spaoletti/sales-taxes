@@ -1,4 +1,4 @@
-package com.salestaxes;
+package com.salestaxes.receipts;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -10,14 +10,13 @@ public class Receipt {
     private List<ReceiptLine> lines;
     private double salesTaxes;
     private final double total;
-    DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.getDefault());
     private final DecimalFormat df;
 
-
-    public Receipt(List<ReceiptLine> lines, double salesTaxes, double total) {
+    Receipt(List<ReceiptLine> lines, double salesTaxes, double total) {
         this.lines = lines;
         this.salesTaxes = salesTaxes;
         this.total = total;
+        DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.getDefault());
         otherSymbols.setDecimalSeparator('.');
         df = new DecimalFormat("0.00", otherSymbols);
     }

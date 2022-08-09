@@ -1,5 +1,7 @@
 package com.salestaxes;
 
+import com.salestaxes.receipts.Receipt;
+import com.salestaxes.receipts.ReceiptFactory;
 import org.junit.Before;
 import org.junit.Test;
 

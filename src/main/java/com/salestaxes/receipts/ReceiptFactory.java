@@ -1,6 +1,8 @@
-package com.salestaxes;
+package com.salestaxes.receipts;
 
-import java.math.BigDecimal;
+import com.salestaxes.MonetaryCalculator;
+import com.salestaxes.Product;
+
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
