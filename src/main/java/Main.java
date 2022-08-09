@@ -1,14 +1,18 @@
-package com.salestaxes;
-
+import com.salestaxes.MonetaryCalculator;
+import com.salestaxes.Product;
 import com.salestaxes.receipts.Receipt;
 import com.salestaxes.receipts.ReceiptFactory;
+import com.salestaxes.taxes.DefaultTaxStrategy;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        ReceiptFactory rf = new ReceiptFactory(new MonetaryCalculator());
+        ReceiptFactory rf = new ReceiptFactory(
+                new MonetaryCalculator(),
+                new DefaultTaxStrategy()
+        );
 
         System.out.println("TEST CASE 1");
         System.out.println("-----------");

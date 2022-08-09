@@ -16,6 +16,7 @@ public class Receipt {
         this.lines = lines;
         this.salesTaxes = salesTaxes;
         this.total = total;
+        // Just to prevent locale surprises...
         DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.getDefault());
         otherSymbols.setDecimalSeparator('.');
         df = new DecimalFormat("0.00", otherSymbols);

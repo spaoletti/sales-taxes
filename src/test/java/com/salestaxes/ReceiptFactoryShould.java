@@ -2,6 +2,7 @@ package com.salestaxes;
 
 import com.salestaxes.receipts.Receipt;
 import com.salestaxes.receipts.ReceiptFactory;
+import com.salestaxes.taxes.DefaultTaxStrategy;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
@@ -20,7 +21,10 @@ public class ReceiptFactoryShould {
 
     @Before
     public void beforeEach() {
-        rf = new ReceiptFactory(new MonetaryCalculator());
+        rf = new ReceiptFactory(
+                new MonetaryCalculator(),
+                new DefaultTaxStrategy()
+        );
     }
 
     @Test

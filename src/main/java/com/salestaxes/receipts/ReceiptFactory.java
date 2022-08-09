@@ -2,6 +2,7 @@ package com.salestaxes.receipts;
 
 import com.salestaxes.MonetaryCalculator;
 import com.salestaxes.Product;
+import com.salestaxes.taxes.TaxStrategy;
 
 import java.util.List;
 import java.util.function.Function;
@@ -10,9 +11,11 @@ import java.util.stream.Collectors;
 public class ReceiptFactory {
 
     private MonetaryCalculator mc;
+    private TaxStrategy ts;
 
-    public ReceiptFactory(MonetaryCalculator mc) {
+    public ReceiptFactory(MonetaryCalculator mc, TaxStrategy ts) {
         this.mc = mc;
+        this.ts = ts;
     }
 
     public Receipt create(List<Product> shoppingBasket) {
@@ -29,10 +32,8 @@ public class ReceiptFactory {
     }
 
     private Function<Product, ReceiptLine> mapProductToReceiptLine = product -> {
-        double standardTaxes = (product.isExempt()) ? 0 : 10;
-        double importTaxes = (product.isImported() ? 5 : 0);
-        double totalTaxes = mc.add(standardTaxes, importTaxes);
-        double taxAmount = mc.percent(product.getNetPrice(), totalTaxes);
+        double taxes = ts.calculate(product);
+        double taxAmount = mc.percent(product.getNetPrice(), taxes);
         double grossPrice = mc.add(product.getNetPrice(), taxAmount);
         return new ReceiptLine(product, grossPrice, taxAmount);
     };
