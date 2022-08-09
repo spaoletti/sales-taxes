@@ -53,4 +53,25 @@ public class GivenTestCases {
         assertEquals(expectedOutput, output);
     }
 
+    @Test
+    public void
+    test_case_3() {
+        List<Product> shoppingBasket = Arrays.asList(
+                new Product("imported bottle of perfume", 27.99),
+                new Product("bottle of perfume", 18.99),
+                new Product("packet of headache pills", 9.75, true),
+                new Product("box of imported chocolates", 11.25, true)
+        );
+        Receipt receipt = rf.create(shoppingBasket);
+        String output = receipt.print();
+        String expectedOutput =
+                "1 imported bottle of perfume: 32.19\n" +
+                "1 bottle of perfume: 20.89\n" +
+                "1 packet of headache pills: 9.75\n" +
+                "1 box of imported chocolates: 11.85\n" +
+                "Sales Taxes: 6.70\n" +
+                "Total: 74.68";
+        assertEquals(expectedOutput, output);
+    }
+
 }
