@@ -40,5 +40,16 @@ public class MonetaryCalculatorShould {
         assertEquals("Error: negative amount.", e.getMessage());
     }
 
+    @Test
+    @Parameters({
+            "47.50, 15, 7.15",
+    })
+    public void
+    round_up_to_the_nearest_five_cents(
+            double amount, double percent, double expected) {
+        MonetaryCalculator mc = new MonetaryCalculator();
+        double percentage = mc.percent(amount, percent);
+        assertEquals(expected, percentage);
+    }
 
 }
