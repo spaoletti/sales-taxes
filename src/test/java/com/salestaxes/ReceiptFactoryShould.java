@@ -106,4 +106,16 @@ public class ReceiptFactoryShould {
         assertTrue(output.contains("51.49"));
     }
 
+    @Test
+    public void
+    create_a_receipt_with_only_import_taxes_for_an_imported_exempt_product() {
+        List<Product> shoppingBasket = Arrays.asList(
+                new Product("imported book", 51.49, true)
+        );
+        Receipt receipt = rf.create(shoppingBasket);
+        String output = receipt.print();
+        assertTrue(output.contains("54.09"));
+    }
+
+
 }
