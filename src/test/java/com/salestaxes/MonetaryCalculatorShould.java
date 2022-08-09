@@ -12,6 +12,7 @@ public class MonetaryCalculatorShould {
 
     @Test
     @Parameters({
+            "5005, 15, 750.75",
             "100, 10, 10",
             "0, 10, 0",
     })
