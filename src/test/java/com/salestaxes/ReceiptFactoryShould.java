@@ -11,11 +11,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ReceiptFactoryShould {
 
-    ReceiptFactory rf = new ReceiptFactory();
+    ReceiptFactory rf;
 
     @Before
     public void beforeEach() {
-        rf = new ReceiptFactory();
+        rf = new ReceiptFactory(new MonetaryCalculator());
     }
 
     @Test
@@ -53,6 +53,19 @@ public class ReceiptFactoryShould {
         String output = receipt.print();
         assertTrue(output.contains("1 book"));
         assertTrue(output.contains("1 music CD"));
+    }
+
+    @Test
+    public void
+    create_a_receipt_with_the_price_with_taxes_of_many_non_imported_non_exempt_products() {
+        List<Product> shoppingBasket = Arrays.asList(
+                new Product("bottle of perfume", 51.49),
+                new Product("music CD", 14.99)
+        );
+        Receipt receipt = rf.create(shoppingBasket);
+        String output = receipt.print();
+        assertTrue(output.contains("56.64"));
+        assertTrue(output.contains("16.49"));
     }
 
 }

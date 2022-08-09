@@ -25,4 +25,7 @@ public class MonetaryCalculator {
                 .multiply(tick);
     }
 
+    public double add(double a, double b) {
+        return BigDecimal.valueOf(a).add(BigDecimal.valueOf(b)).doubleValue();
+    }
 }
