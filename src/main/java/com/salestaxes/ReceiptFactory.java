@@ -1,5 +1,6 @@
 package com.salestaxes;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -16,7 +17,11 @@ public class ReceiptFactory {
         List<ReceiptLine> lines = shoppingBasket.stream()
                 .map(mapProductToReceiptLine)
                 .collect(Collectors.toList());
-        return new Receipt(lines);
+        double salesTaxes = 0;
+        for (ReceiptLine l : lines) {
+            salesTaxes = mc.add(salesTaxes, l.getTaxes());
+        }
+        return new Receipt(lines, salesTaxes);
     }
 
     private Function<Product, ReceiptLine> mapProductToReceiptLine = product -> {
@@ -25,7 +30,7 @@ public class ReceiptFactory {
         double totalTaxes = mc.add(standardTaxes, importTaxes);
         double taxAmount = mc.percent(product.getNetPrice(), totalTaxes);
         double grossPrice = mc.add(product.getNetPrice(), taxAmount);
-        return new ReceiptLine(product, grossPrice);
+        return new ReceiptLine(product, grossPrice, taxAmount);
     };
 
 }

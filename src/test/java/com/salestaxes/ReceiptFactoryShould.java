@@ -81,7 +81,7 @@ public class ReceiptFactoryShould {
         String expectedOutput =
                 "1 bottle of perfume: 56.64\n" +
                 "1 music CD: 16.49\n";
-        assertEquals(expectedOutput, output);
+        assertTrue(output.contains(expectedOutput));
     }
 
     @Test
@@ -110,12 +110,24 @@ public class ReceiptFactoryShould {
     public void
     create_a_receipt_with_only_import_taxes_for_an_imported_exempt_product() {
         List<Product> shoppingBasket = Arrays.asList(
-                new Product("imported book", 51.49, true)
+                new Product("imported book", 51.49, true),
+                new Product("imported bottle of perfume", 51.49)
         );
         Receipt receipt = rf.create(shoppingBasket);
         String output = receipt.print();
         assertTrue(output.contains("54.09"));
     }
 
+    @Test
+    public void
+    create_a_receipt_with_the_total_sales_taxes_line() {
+        List<Product> shoppingBasket = Arrays.asList(
+                new Product("imported book", 51.49, true),
+                new Product("imported bottle of perfume", 51.49)
+        );
+        Receipt receipt = rf.create(shoppingBasket);
+        String output = receipt.print();
+        assertTrue(output.contains("Sales Taxes: 10.35"));
+    }
 
 }

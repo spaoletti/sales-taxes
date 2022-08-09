@@ -4,10 +4,12 @@ import java.util.List;
 
 public class Receipt {
 
-    List<ReceiptLine> lines;
+    private List<ReceiptLine> lines;
+    private double salesTaxes;
 
-    public Receipt(List<ReceiptLine> lines) {
+    public Receipt(List<ReceiptLine> lines, double salesTaxes) {
         this.lines = lines;
+        this.salesTaxes = salesTaxes;
     }
 
     public String print() {
@@ -16,7 +18,9 @@ public class Receipt {
             sb.append(line);
             sb.append('\n');
         }
+        sb.append("Sales Taxes: " + salesTaxes);
         return sb.toString();
     }
+
 
 }
