@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -34,8 +33,7 @@ public class ReceiptFactoryShould {
                 new Product("book", 12.49)
         );
         Receipt receipt = rf.create(shoppingBasket);
-        String output = receipt.print();
-        assertTrue(output.contains("book"));
+        assertEquals("book", receipt.getLines().get(0).getDescription());
     }
 
     @Test

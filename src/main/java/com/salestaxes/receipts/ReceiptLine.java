@@ -4,7 +4,7 @@ import com.salestaxes.Product;
 
 import java.text.DecimalFormat;
 
-class ReceiptLine {
+public class ReceiptLine {
 
     private final double grossPrice;
     private final double taxes;
@@ -16,12 +16,16 @@ class ReceiptLine {
         this.taxes = taxes;
     }
 
+    public double getGrossPrice() {
+        return grossPrice;
+    }
+
     public double getTaxes() {
         return taxes;
     }
 
-    public double getGrossPrice() {
-        return grossPrice;
+    public String getDescription() {
+        return description;
     }
 
     public String toString(DecimalFormat df) {
