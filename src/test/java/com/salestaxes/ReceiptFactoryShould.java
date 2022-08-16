@@ -126,40 +126,4 @@ public class ReceiptFactoryShould {
         assertEquals(113.33, receipt.getTotal());
     }
 
-    // TODO view
-    @Test
-    public void
-    create_a_receipt_with_properly_formatted_prices() {
-        List<Product> shoppingBasket = Arrays.asList(
-                new Product("book", 100)
-        );
-        Receipt receipt = rf.create(shoppingBasket);
-        String output = receipt.print();
-        String expectedOutput =
-                "1 book: 110.00\n" +
-                "Sales Taxes: 10.00\n" +
-                "Total: 110.00";
-        Assertions.assertEquals(expectedOutput, output);
-    }
-
-    // TODO view
-    @Test
-    public void
-    create_a_complete_receipt() {
-        List<Product> shoppingBasket = Arrays.asList(
-                new Product("book", 12.49, true),
-                new Product("music CD", 14.99),
-                new Product("chocolate bar", 0.85, true)
-        );
-        Receipt receipt = rf.create(shoppingBasket);
-        String output = receipt.print();
-        String expectedOutput =
-                "1 book: 12.49\n" +
-                "1 music CD: 16.49\n" +
-                "1 chocolate bar: 0.85\n" +
-                "Sales Taxes: 1.50\n" +
-                "Total: 29.83";
-        assertEquals(expectedOutput, output);
-    }
-
 }
