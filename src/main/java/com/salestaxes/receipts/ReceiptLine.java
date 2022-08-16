@@ -28,6 +28,10 @@ public class ReceiptLine {
         return description;
     }
 
+    public String getQty() {
+        return "1";
+    }
+
     public String toString(DecimalFormat df) {
         return "1 " + description + ": " + df.format(grossPrice);
     }
