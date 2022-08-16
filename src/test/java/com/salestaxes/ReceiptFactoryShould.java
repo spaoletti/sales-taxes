@@ -44,9 +44,8 @@ public class ReceiptFactoryShould {
                 new Product("music CD", 14.99)
         );
         Receipt receipt = rf.create(shoppingBasket);
-        String output = receipt.print();
-        assertTrue(output.contains("book"));
-        assertTrue(output.contains("music CD"));
+        assertEquals("book", receipt.getLines().get(0).getDescription());
+        assertEquals("music CD", receipt.getLines().get(1).getDescription());
     }
 
     @Test
