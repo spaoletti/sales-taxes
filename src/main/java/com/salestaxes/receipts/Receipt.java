@@ -30,6 +30,10 @@ public class Receipt {
         return lines;
     }
 
+    public double getSalesTaxes() {
+        return salesTaxes;
+    }
+
     public String print() {
         StringBuilder sb = new StringBuilder();
         for (ReceiptLine line : lines) {

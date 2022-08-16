@@ -128,8 +128,7 @@ public class ReceiptFactoryShould {
                 new Product("imported bottle of perfume", 51.49)
         );
         Receipt receipt = rf.create(shoppingBasket);
-        String output = receipt.print();
-        assertTrue(output.contains("Sales Taxes: 10.35"));
+        assertEquals(10.35, receipt.getSalesTaxes());
     }
 
     @Test
