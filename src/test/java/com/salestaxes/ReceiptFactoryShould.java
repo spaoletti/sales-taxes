@@ -107,8 +107,7 @@ public class ReceiptFactoryShould {
                 new Product("book", 51.49, true)
         );
         Receipt receipt = rf.create(shoppingBasket);
-        String output = receipt.print();
-        assertTrue(output.contains("51.49"));
+        assertEquals(51.49, receipt.getLines().get(0).getGrossPrice());
     }
 
     @Test
