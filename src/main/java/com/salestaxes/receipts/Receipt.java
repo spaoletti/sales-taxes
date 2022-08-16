@@ -34,6 +34,10 @@ public class Receipt {
         return salesTaxes;
     }
 
+    public double getTotal() {
+        return total;
+    }
+
     public String print() {
         StringBuilder sb = new StringBuilder();
         for (ReceiptLine line : lines) {
