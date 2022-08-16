@@ -5,12 +5,11 @@ import com.salestaxes.receipts.ReceiptFactory;
 import com.salestaxes.taxes.DefaultTaxStrategy;
 import com.salestaxes.view.ConsoleView;
 import com.salestaxes.view.View;
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import utils.MockStandardOutput;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,28 +19,21 @@ public class GivenTestCases {
 
     ReceiptFactory rf;
     View v;
+    MockStandardOutput mockStdOut = new MockStandardOutput();
 
-    private ByteArrayOutputStream mockStdOut = new ByteArrayOutputStream();
-    private static final PrintStream originalStdOut = System.out;
-
-    @AfterClass
-    public static void afterAll() {
-        System.setOut(originalStdOut);
+    @After
+    public void afterEach() {
+        mockStdOut.reset();
     }
 
     @Before
     public void beforeEach() {
-        resetStandardOutput();
+        mockStdOut.capture();
         rf = new ReceiptFactory(
                 new MonetaryCalculator(),
                 new DefaultTaxStrategy()
         );
         v = new ConsoleView();
-    }
-
-    private void resetStandardOutput() {
-        mockStdOut = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(mockStdOut));
     }
 
     @Test
@@ -60,7 +52,7 @@ public class GivenTestCases {
                 "1 chocolate bar: 0.85\n" +
                 "Sales Taxes: 1.50\n" +
                 "Total: 29.83";
-        assertTrue(mockStdOut.toString().contains(expectedOutput));
+        assertTrue(mockStdOut.read().contains(expectedOutput));
     }
 
     @Test
@@ -77,7 +69,7 @@ public class GivenTestCases {
                         "1 imported bottle of perfume: 54.65\n" +
                         "Sales Taxes: 7.65\n" +
                         "Total: 65.15";
-        assertTrue(mockStdOut.toString().contains(expectedOutput));
+        assertTrue(mockStdOut.read().contains(expectedOutput));
     }
 
     @Test
@@ -98,7 +90,7 @@ public class GivenTestCases {
                 "1 box of imported chocolates: 11.85\n" +
                 "Sales Taxes: 6.70\n" +
                 "Total: 74.68";
-        assertTrue(mockStdOut.toString().contains(expectedOutput));
+        assertTrue(mockStdOut.read().contains(expectedOutput));
     }
 
 }

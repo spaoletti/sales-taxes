@@ -5,12 +5,11 @@ import com.salestaxes.receipts.ReceiptFactory;
 import com.salestaxes.taxes.DefaultTaxStrategy;
 import com.salestaxes.view.ConsoleView;
 import com.salestaxes.view.View;
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import utils.MockStandardOutput;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,24 +18,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class ConsoleViewShould {
 
     View v;
+    MockStandardOutput mockStdOut = new MockStandardOutput();
 
-    private ByteArrayOutputStream mockStdOut = new ByteArrayOutputStream();
-    private static final PrintStream originalStdOut = System.out;
-
-    @AfterClass
-    public static void afterAll() {
-        System.setOut(originalStdOut);
+    @After
+    public void afterEach() {
+        mockStdOut.reset();
     }
 
     @Before
     public void beforeEach() {
-        resetStandardOutput();
+        mockStdOut.capture();
         v = new ConsoleView();
-    }
-
-    private void resetStandardOutput() {
-        mockStdOut = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(mockStdOut));
     }
 
     private Receipt createReceipt(List<Product> shoppingBasket) {
@@ -58,7 +50,7 @@ public class ConsoleViewShould {
         String expectedOutput =
                 "1 bottle of perfume: 56.64\n" +
                 "1 music CD: 16.49\n";
-        assertTrue(mockStdOut.toString().contains(expectedOutput));
+        assertTrue(mockStdOut.read().contains(expectedOutput));
     }
 
     @Test
@@ -72,7 +64,7 @@ public class ConsoleViewShould {
                 "1 book: 110.00\n" +
                 "Sales Taxes: 10.00\n" +
                 "Total: 110.00";
-        assertTrue(mockStdOut.toString().contains(expectedOutput));
+        assertTrue(mockStdOut.read().contains(expectedOutput));
     }
 
     @Test
@@ -90,7 +82,7 @@ public class ConsoleViewShould {
                 "1 chocolate bar: 0.85\n" +
                 "Sales Taxes: 1.50\n" +
                 "Total: 29.83";
-        assertTrue(mockStdOut.toString().contains(expectedOutput));
+        assertTrue(mockStdOut.read().contains(expectedOutput));
     }
 
 }
