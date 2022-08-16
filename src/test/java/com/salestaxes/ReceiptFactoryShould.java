@@ -74,6 +74,7 @@ public class ReceiptFactoryShould {
         assertEquals(16.49, receipt.getLines().get(1).getGrossPrice());
     }
 
+    // TODO view
     @Test
     public void
     create_a_receipt_with_properly_formatted_lines() {
@@ -96,8 +97,7 @@ public class ReceiptFactoryShould {
                 new Product("imported bottle of perfume", 51.49)
         );
         Receipt receipt = rf.create(shoppingBasket);
-        String output = receipt.print();
-        assertTrue(output.contains("59.24"));
+        assertEquals(59.24, receipt.getLines().get(0).getGrossPrice());
     }
 
     @Test
