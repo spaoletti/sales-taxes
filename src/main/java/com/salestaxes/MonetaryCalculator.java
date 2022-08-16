@@ -14,13 +14,13 @@ public class MonetaryCalculator {
         return roundUp(
                 BigDecimal.valueOf(amount)
                 .multiply(BigDecimal.valueOf(percent))
-                .divide(BigDecimal.valueOf(100))
+                .divide(BigDecimal.valueOf(100), RoundingMode.HALF_EVEN)
         ).doubleValue();
     }
 
     private BigDecimal roundUp(BigDecimal price) {
         return price
-                .divide(tick, 9, RoundingMode.HALF_EVEN)
+                .divide(tick, 9, RoundingMode.UNNECESSARY)
                 .setScale(0, RoundingMode.CEILING)
                 .multiply(tick);
     }

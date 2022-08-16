@@ -2,13 +2,11 @@ package com.salestaxes.receipts;
 
 import com.salestaxes.Product;
 
-import java.text.DecimalFormat;
-
 public class ReceiptLine {
 
     private final double grossPrice;
     private final double taxes;
-    private String description;
+    private final String description;
 
     ReceiptLine(Product product, double grossPrice, double taxes) {
         this.description = product.getDescription();
@@ -30,10 +28,6 @@ public class ReceiptLine {
 
     public String getQty() {
         return "1";
-    }
-
-    public String toString(DecimalFormat df) {
-        return "1 " + description + ": " + df.format(grossPrice);
     }
 
 }

@@ -5,13 +5,11 @@ import com.salestaxes.receipts.ReceiptFactory;
 import com.salestaxes.taxes.DefaultTaxStrategy;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class ReceiptFactoryShould {
@@ -29,7 +27,7 @@ public class ReceiptFactoryShould {
     @Test
     public void
     create_a_receipt_with_the_description_of_a_single_product() {
-        List<Product> shoppingBasket = Arrays.asList(
+        List<Product> shoppingBasket = List.of(
                 new Product("book", 12.49)
         );
         Receipt receipt = rf.create(shoppingBasket);
@@ -77,7 +75,7 @@ public class ReceiptFactoryShould {
     @Test
     public void
     create_a_receipt_with_the_price_with_taxes_of_a_single_imported_product() {
-        List<Product> shoppingBasket = Arrays.asList(
+        List<Product> shoppingBasket = List.of(
                 new Product("imported bottle of perfume", 51.49)
         );
         Receipt receipt = rf.create(shoppingBasket);
@@ -87,7 +85,7 @@ public class ReceiptFactoryShould {
     @Test
     public void
     create_a_receipt_with_no_taxes_for_an_exempt_product() {
-        List<Product> shoppingBasket = Arrays.asList(
+        List<Product> shoppingBasket = List.of(
                 new Product("book", 51.49, true)
         );
         Receipt receipt = rf.create(shoppingBasket);
@@ -97,7 +95,7 @@ public class ReceiptFactoryShould {
     @Test
     public void
     create_a_receipt_with_only_import_taxes_for_an_imported_exempt_product() {
-        List<Product> shoppingBasket = Arrays.asList(
+        List<Product> shoppingBasket = List.of(
                 new Product("imported book", 51.49, true)
         );
         Receipt receipt = rf.create(shoppingBasket);

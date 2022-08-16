@@ -3,6 +3,8 @@ import com.salestaxes.Product;
 import com.salestaxes.receipts.Receipt;
 import com.salestaxes.receipts.ReceiptFactory;
 import com.salestaxes.taxes.DefaultTaxStrategy;
+import com.salestaxes.view.ConsoleView;
+import com.salestaxes.view.View;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,6 +15,7 @@ public class Main {
                 new MonetaryCalculator(),
                 new DefaultTaxStrategy()
         );
+        View cv = new ConsoleView();
 
         System.out.println("TEST CASE 1");
         System.out.println("-----------");
@@ -22,7 +25,7 @@ public class Main {
                 new Product("chocolate bar", 0.85, true)
         );
         Receipt receipt1 = rf.create(shoppingBasket1);
-        System.out.println(receipt1.print());
+        cv.render(receipt1);
 
         System.out.println("\nTEST CASE 2");
         System.out.println("-----------");
@@ -31,7 +34,7 @@ public class Main {
                 new Product("imported bottle of perfume", 47.50)
         );
         Receipt receipt2 = rf.create(shoppingBasket2);
-        System.out.println(receipt2.print());
+        cv.render(receipt2);
 
         System.out.println("\nTEST CASE 3");
         System.out.println("-----------");
@@ -42,8 +45,6 @@ public class Main {
                 new Product("box of imported chocolates", 11.25, true)
         );
         Receipt receipt3 = rf.create(shoppingBasket3);
-        System.out.println(receipt3.print());
-
-
+        cv.render(receipt3);
     }
 }

@@ -3,9 +3,8 @@ package com.salestaxes.view;
 import com.salestaxes.receipts.Receipt;
 import com.salestaxes.receipts.ReceiptLine;
 
-import java.text.DecimalFormat;
-
 public class ConsoleView extends View {
+
     @Override
     public void render(Receipt receipt) {
         StringBuilder sb = new StringBuilder();

@@ -3,24 +3,45 @@ package com.salestaxes;
 import com.salestaxes.receipts.Receipt;
 import com.salestaxes.receipts.ReceiptFactory;
 import com.salestaxes.taxes.DefaultTaxStrategy;
+import com.salestaxes.view.ConsoleView;
+import com.salestaxes.view.View;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class GivenTestCases {
 
     ReceiptFactory rf;
+    View v;
+
+    private ByteArrayOutputStream mockStdOut = new ByteArrayOutputStream();
+    private static final PrintStream originalStdOut = System.out;
+
+    @AfterClass
+    public static void afterAll() {
+        System.setOut(originalStdOut);
+    }
 
     @Before
     public void beforeEach() {
+        resetStandardOutput();
         rf = new ReceiptFactory(
                 new MonetaryCalculator(),
                 new DefaultTaxStrategy()
         );
+        v = new ConsoleView();
+    }
+
+    private void resetStandardOutput() {
+        mockStdOut = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(mockStdOut));
     }
 
     @Test
@@ -32,14 +53,14 @@ public class GivenTestCases {
                 new Product("chocolate bar", 0.85, true)
         );
         Receipt receipt = rf.create(shoppingBasket);
-        String output = receipt.print();
+        v.render(receipt);
         String expectedOutput =
                 "1 book: 12.49\n" +
                 "1 music CD: 16.49\n" +
                 "1 chocolate bar: 0.85\n" +
                 "Sales Taxes: 1.50\n" +
                 "Total: 29.83";
-        assertEquals(expectedOutput, output);
+        assertTrue(mockStdOut.toString().contains(expectedOutput));
     }
 
     @Test
@@ -50,13 +71,13 @@ public class GivenTestCases {
                 new Product("imported bottle of perfume", 47.50)
         );
         Receipt receipt = rf.create(shoppingBasket);
-        String output = receipt.print();
+        v.render(receipt);
         String expectedOutput =
                         "1 imported box of chocolates: 10.50\n" +
                         "1 imported bottle of perfume: 54.65\n" +
                         "Sales Taxes: 7.65\n" +
                         "Total: 65.15";
-        assertEquals(expectedOutput, output);
+        assertTrue(mockStdOut.toString().contains(expectedOutput));
     }
 
     @Test
@@ -69,7 +90,7 @@ public class GivenTestCases {
                 new Product("box of imported chocolates", 11.25, true)
         );
         Receipt receipt = rf.create(shoppingBasket);
-        String output = receipt.print();
+        v.render(receipt);
         String expectedOutput =
                 "1 imported bottle of perfume: 32.19\n" +
                 "1 bottle of perfume: 20.89\n" +
@@ -77,7 +98,7 @@ public class GivenTestCases {
                 "1 box of imported chocolates: 11.85\n" +
                 "Sales Taxes: 6.70\n" +
                 "Total: 74.68";
-        assertEquals(expectedOutput, output);
+        assertTrue(mockStdOut.toString().contains(expectedOutput));
     }
 
 }
